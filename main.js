@@ -91,6 +91,26 @@ const deleteBook = (id) => {
   }
 };
 
+const editBook = (id) => {
+  const books = getBooks();
+  const bookIndex = books.findIndex((book) => book.id === id);
+
+  if (bookIndex !== -1) {
+    const newTitle = prompt("Judul Baru: ", books[bookIndex].titleBook);
+    const newAuthor = prompt("Author Baru: ", books[bookIndex].authorBook);
+    const newYear = prompt("Tahun Baru: ", books[bookIndex].yearBookForm);
+
+    if (newTitle && newAuthor && newYear) {
+      books[bookIndex].titleBook = newTitle;
+      books[bookIndex].authorBook = newAuthor;
+      books[bookIndex].yearBookForm = newYear;
+
+      saveBooks(books);
+      renderBooks();
+    }
+  }
+};
+
 const renderBooks = (query = "") => {
   const incompleteBookList = document.getElementById("incompleteBookList");
   const completeBookList = document.getElementById("completeBookList");
