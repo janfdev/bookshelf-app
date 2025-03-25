@@ -83,22 +83,39 @@ const renderBooks = (searchValue = "") => {
 
   books.forEach((book) => {
     const bookWrapper = document.createElement("div");
+    bookWrapper.classList.add(
+      "flex",
+      "flex-col",
+      "items-start",
+      "gap-3",
+      "p-5",
+      "rounded-md",
+      "justify-center",
+      "shadow-lg"
+    );
+
     bookWrapper.dataset.bookid = book.id;
     bookWrapper.dataset.testid = "bookItem";
     bookWrapper.innerHTML = `
-    <h3 data-testid="bookItemTitle">Judul: ${book.titleBook}</h3>
-    <p data-testid="bookItemAuthor">Penulis: ${book.authorBook}</p>
-    <p data-testid="bookItemYear">Tahun: ${book.yearBookForm}</p>
-    <div>
-      <button data-testid="bookItemIsCompleteButton" onclick="toggleBookStatus(${
-        book.id
-      })">${
-      book.isComplete ? "Belum selesai dibaca" : "Selesai dibaca"
-    }</button>
-      <button data-testid="bookItemDeleteButton" onclick="deleteBook(${
+    <h3 data-testid="bookItemTitle" class="text-xl">Judul : ${
+      book.titleBook
+    }</h3>
+    <p data-testid="bookItemAuthor" class="text-xl">Penulis : ${
+      book.authorBook
+    }</p>
+    <p data-testid="bookItemYear" class="text-xl">Tahun : ${
+      book.yearBookForm
+    }</p>
+    <div class="flex gap-3">
+      <button class="${
+        book.isComplete ? "bg-red-400" : "bg-green-400"
+      } text-white py-2 px-3 rounded-sm" data-testid="bookItemIsCompleteButton" onclick="toggleBookStatus(${
+      book.id
+    })">${book.isComplete ? "Belum selesai dibaca" : "Selesai dibaca"}</button>
+      <button class="bg-red-500 text-white py-2 px-5 rounded-sm" data-testid="bookItemDeleteButton" onclick="deleteBook(${
         book.id
       })">Hapus</button>
-      <button data-testid="bookItemEditButton" onclick="editBook(${
+      <button class="bg-yellow-500 text-white py-2 px-6 rounded-sm" data-testid="bookItemEditButton" onclick="editBook(${
         book.id
       })">Edit</button>
     </div>
@@ -152,7 +169,6 @@ const editBook = (id) => {
     }
   }
 };
-
 
 function onlyNum(object) {
   if (object.value.length > 4) {
