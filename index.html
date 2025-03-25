@@ -24,7 +24,6 @@
       </header>
 
       <main class="flex flex-col md:flex-row gap-6 mt-6">
-        <!-- Form Tambah Buku & Cari Buku -->
         <div class="md:w-1/3 w-full bg-white p-6 rounded-lg shadow">
           <section class="mb-6">
             <h2 class="text-2xl font-semibold mb-4">Tambah Buku Baru</h2>
@@ -116,47 +115,25 @@
           </section>
         </div>
 
-        <!-- Daftar Buku -->
         <div class="md:w-2/3 w-full space-y-6">
           <section class="bg-white p-6 rounded-lg shadow">
             <h2 class="text-2xl font-semibold mb-4">Belum Selesai Dibaca</h2>
-            <div
-              id="incompleteBookList"
-              data-testid="incompleteBookList"
-              class="space-y-4"
-            >
-              <div
-                data-bookid="123123123"
-                data-testid="bookItem"
-                class="p-4 border rounded-md"
-              >
-                <h3 data-testid="bookItemTitle" class="font-semibold">
-                  Judul Buku 1
-                </h3>
-                <p data-testid="bookItemAuthor">Penulis: Penulis Buku 1</p>
-                <p data-testid="bookItemYear">Tahun: 2030</p>
-                <div class="mt-2 space-x-2">
-                  <button
-                    class="px-4 py-1 bg-green-500 text-white rounded-md"
-                    data-testid="bookItemIsCompleteButton"
-                  >
-                    Selesai dibaca
-                  </button>
-                  <button
-                    class="px-4 py-1 bg-red-500 text-white rounded-md"
-                    data-testid="bookItemDeleteButton"
-                  >
-                    Hapus Buku
-                  </button>
-                  <button
-                    class="px-4 py-1 bg-yellow-500 text-white rounded-md"
-                    data-testid="bookItemEditButton"
-                  >
-                    Edit Buku
-                  </button>
-                </div>
+            <!-- 
+              Ini adalah struktur HTML untuk masing-masing buku.
+              Pastikan susunan elemen beserta atribut data-testid menyesuaikan seperti contoh ini.
+            -->
+            <!-- <div data-bookid="123123123" data-testid="bookItem">
+              <h3 data-testid="bookItemTitle">Judul Buku 1</h3>
+              <p data-testid="bookItemAuthor">Penulis: Penulis Buku 1</p>
+              <p data-testid="bookItemYear">Tahun: 2030</p>
+              <div>
+                <button data-testid="bookItemIsCompleteButton">
+                  Selesai dibaca
+                </button>
+                <button data-testid="bookItemDeleteButton">Hapus Buku</button>
+                <button data-testid="bookItemEditButton">Edit Buku</button>
               </div>
-            </div>
+            </div> -->
           </section>
           <section class="bg-white p-6 rounded-lg shadow">
             <h2 class="text-2xl font-semibold mb-4">Selesai Dibaca</h2>
@@ -165,7 +142,22 @@
               data-testid="completeBookList"
               class="space-y-4"
             >
-              <!-- Daftar buku selesai dibaca akan muncul di sini -->
+              <!-- 
+              Ini adalah struktur HTML untuk masing-masing buku.
+              Pastikan susunan elemen beserta atribut data-testid menyesuaikan seperti contoh ini.
+            -->
+              <!-- <div data-bookid="456456456" data-testid="bookItem">
+              <h3 data-testid="bookItemTitle">Judul Buku 2</h3>
+              <p data-testid="bookItemAuthor">Penulis: Penulis Buku 2</p>
+              <p data-testid="bookItemYear">Tahun: 2030</p>
+              <div>
+                <button data-testid="bookItemIsCompleteButton">
+                  Belum Selesai dibaca
+                </button>
+                <button data-testid="bookItemDeleteButton">Hapus Buku</button>
+                <button data-testid="bookItemEditButton">Edit Buku</button>
+              </div>
+            </div> -->
             </div>
           </section>
         </div>
