@@ -2,20 +2,35 @@ const STORAGE_KEY = "bookshelflist";
 
 document.addEventListener("DOMContentLoaded", (e) => {
   e.preventDefault();
-  const bookForm = document.getElementById("bookFormSubmit");
+  const bookForm = document.getElementById("bookForm");
   const searchBookForm = document.getElementById("searchBook");
+  const bookFormIsComplete = document.getElementById("bookFormIsComplete");
 
   bookForm.addEventListener("submit", addBooks);
   searchBookForm.addEventListener("submit", searchBooks);
+  bookFormIsComplete.addEventListener("change", changeText);
 
   renderBooks();
+
+  function changeText() {
+    const spanButton = document.getElementById("textChange");
+    const bookFormIsComplete = document.getElementById("bookFormIsComplete");
+    const labelCheckbox = document.querySelector(".label-span");
+    if (bookFormIsComplete.checked) {
+      spanButton.innerText = "Selesai Dibaca";
+      labelCheckbox.innerText = "Selesai Dibaca";
+    } else {
+      spanButton.innerText = "Belum selesai dibaca";
+      labelCheckbox.innerText = "Belum selesai dibaca";
+    }
+  }
 });
 
 function getBooks() {
   return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 }
 
-function saveBooks() {
+function saveBooks(books) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(books));
 }
 
@@ -54,7 +69,7 @@ function searchBooks(e) {
   renderBooks(query);
 }
 
-function renderBooks(query) {
+function renderBooks(query = "") {
   const incompleteBookList = document.getElementById("incompleteBookList");
   const completeBookList = document.getElementById("completeBookList");
 
@@ -62,7 +77,7 @@ function renderBooks(query) {
   completeBookList.innerHTML = "";
 
   const books = getBooks().filter((book) =>
-    book.title.toLowerCase().includes(query)
+    book.titleBook.toLowerCase().includes(query)
   );
 
   books.forEach((book) => {
@@ -70,14 +85,14 @@ function renderBooks(query) {
     bookWrapper.dataset.bookid = book.id;
     bookWrapper.dataset.testid = "bookItem";
     bookWrapper.innerHTML = `
-    <h3 data-testid="bookItemTitle">${book.title}</h3>
-    <p data-testid="bookItemAuthor">Penulis ${book.author}</p>
-    <p data-testid="bookItemYear">Tahun ${book.year}</p>
+    <h3 data-testid="bookItemTitle">${book.titleBook}</h3>
+    <p data-testid="bookItemAuthor">Penulis ${book.authorBook}</p>
+    <p data-testid="bookItemYear">Tahun ${book.yearBookForm}</p>
     <div>
       <button data-testid="bookItemIsCompleteButton" onclick="toggleBookStatus(${
         book.id
       })">
-        ${book.isComplete ? "Selesai dibaca" : "Belum selesai dibaca"}
+        ${book.isComplete ? "Belum selesai dibaca" : "Selesai dibaca"}
       </button>
       <button data-testid="bookItemDeleteButton" onclick="deleteBook(${
         book.id
