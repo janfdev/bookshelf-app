@@ -1,7 +1,8 @@
-const STORAGE_KEY = "bookShelfList";
+const STORAGE_KEY = "bookshelflist";
 
 document.addEventListener("DOMContentLoaded", (e) => {
-  const bookForm = document.getElementById("bookForm");
+  e.preventDefault();
+  const bookForm = document.getElementById("bookFormSubmit");
   const searchBookForm = document.getElementById("searchBook");
 
   bookForm.addEventListener("submit", addBooks);
@@ -11,7 +12,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 });
 
 function getBooks() {
-  JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 }
 
 function saveBooks() {
@@ -47,7 +48,13 @@ const addBooks = (event) => {
   document.getElementById("bookForm").reset();
 };
 
-function renderBooks(query = "") {
+function searchBooks(e) {
+  e.preventDefault();
+  const query = document.getElementById("searchBookTitle").value.toLowerCase();
+  renderBooks(query);
+}
+
+function renderBooks(query) {
   const incompleteBookList = document.getElementById("incompleteBookList");
   const completeBookList = document.getElementById("completeBookList");
 
