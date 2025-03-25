@@ -26,13 +26,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
   }
 });
 
-function getBooks() {
+const getBooks = () => {
   return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-}
+};
 
-function saveBooks(books) {
+const saveBooks = (books) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(books));
-}
+};
 
 const uniqueId = () => {
   return new Date().getTime();
@@ -62,14 +62,36 @@ const addBooks = (event) => {
   renderBooks();
   document.getElementById("bookForm").reset();
 };
-
-function searchBooks(e) {
+const searchBooks = (e) => {
   e.preventDefault();
   const query = document.getElementById("searchBookTitle").value.toLowerCase();
   renderBooks(query);
-}
+};
 
-function renderBooks(query = "") {
+const toggleBookStatus = (id) => {
+  const books = getBooks();
+  const book = books.find((book) => book.id === id);
+
+  if (book) {
+    book.isComplete = !book.isComplete;
+    saveBooks(books);
+    renderBooks();
+  }
+};
+
+const deleteBook = (id) => {
+  let books = getBooks();
+  const confirmDelete = confirm("Apakah anda yakin menghapus buku ini");
+
+  if (confirmDelete) {
+    books = books.filter((book) => book.id !== id);
+    localStorage.removeItem(STORAGE_KEY, books);
+    saveBooks(books);
+    renderBooks();
+  }
+};
+
+const renderBooks = (query = "") => {
   const incompleteBookList = document.getElementById("incompleteBookList");
   const completeBookList = document.getElementById("completeBookList");
 
@@ -109,4 +131,4 @@ function renderBooks(query = "") {
       incompleteBookList.appendChild(bookWrapper);
     }
   });
-}
+};
