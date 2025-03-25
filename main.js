@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const bookForm = document.getElementById("bookForm");
   const searchBookForm = document.getElementById("searchBook");
 
-  bookForm.addEventListener("submit", addBook);
+  bookForm.addEventListener("submit", addBooks);
   searchBookForm.addEventListener("submit", searchBooks);
 
   renderBooks();
@@ -38,7 +38,7 @@ const addBooks = (event) => {
     titleBook,
     authorBook,
     yearBookForm,
-    isComplete
+    isComplete,
   };
 
   books.push(newBook);
