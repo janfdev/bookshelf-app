@@ -57,4 +57,34 @@ function renderBooks(query = "") {
   const books = getBooks().filter((book) =>
     book.title.toLowerCase().includes(query)
   );
+
+  books.forEach((book) => {
+    const bookWrapper = document.createElement("div");
+    bookWrapper.dataset.bookid = book.id;
+    bookWrapper.dataset.testid = "bookItem";
+    bookWrapper.innerHTML = `
+    <h3 data-testid="bookItemTitle">${book.title}</h3>
+    <p data-testid="bookItemAuthor">Penulis ${book.author}</p>
+    <p data-testid="bookItemYear">Tahun ${book.year}</p>
+    <div>
+      <button data-testid="bookItemIsCompleteButton" onclick="toggleBookStatus(${
+        book.id
+      })">
+        ${book.isComplete ? "Selesai dibaca" : "Belum selesai dibaca"}
+      </button>
+      <button data-testid="bookItemDeleteButton" onclick="deleteBook(${
+        book.id
+      })">Hapus Buku</button>
+      <button data-testid="bookItemEditButton" onclick="editBook(${
+        book.id
+      })">Edit Buku</button>
+    </div>
+    `;
+
+    if (book.isComplete) {
+      completeBookList.appendChild(bookWrapper);
+    } else {
+      incompleteBookList.appendChild(bookWrapper);
+    }
+  });
 }
