@@ -40,18 +40,20 @@ const uniqueId = () => {
 const addBooks = (event) => {
   event.preventDefault();
 
-  const titleBook = document.getElementById("bookFormTitle").value.trim();
-  const authorBook = document.getElementById("bookFormAuthor").value.trim();
-  const yearBookForm = document.getElementById("bookFormYear").value.trim();
+  const title = document.getElementById("bookFormTitle").value.trim();
+  const author = document.getElementById("bookFormAuthor").value.trim();
+  const yearBook = document.getElementById("bookFormYear").value.trim();
+  const year = parseInt(yearBook);
+
   const isComplete = document.getElementById("bookFormIsComplete").checked;
 
   const books = getBooks();
   const newBook = {
     id: uniqueId(),
     testid: `book-${uniqueId()}`,
-    titleBook,
-    authorBook,
-    yearBookForm,
+    title,
+    author,
+    year,
     isComplete,
   };
 
@@ -78,7 +80,7 @@ const renderBooks = (searchValue = "") => {
   completeBookList.innerHTML = "";
 
   const books = getBooks().filter((book) =>
-    book.titleBook.toLowerCase().includes(searchValue)
+    book.title.toLowerCase().includes(searchValue)
   );
 
   books.forEach((book) => {
@@ -97,15 +99,9 @@ const renderBooks = (searchValue = "") => {
     bookWrapper.dataset.bookid = book.id;
     bookWrapper.dataset.testid = "bookItem";
     bookWrapper.innerHTML = `
-    <h3 data-testid="bookItemTitle" class="text-xl">Judul : ${
-      book.titleBook
-    }</h3>
-    <p data-testid="bookItemAuthor" class="text-xl">Penulis : ${
-      book.authorBook
-    }</p>
-    <p data-testid="bookItemYear" class="text-xl">Tahun : ${
-      book.yearBookForm
-    }</p>
+    <h3 data-testid="bookItemTitle" class="text-xl">Judul : ${book.title}</h3>
+    <p data-testid="bookItemAuthor" class="text-xl">Penulis : ${book.author}</p>
+    <p data-testid="bookItemYear" class="text-xl">Tahun : ${book.year}</p>
     <div class="flex gap-3">
       <button class="${
         book.isComplete ? "bg-red-400" : "bg-green-400"
@@ -155,14 +151,14 @@ const editBook = (id) => {
   const bookIndex = books.findIndex((book) => book.id === id);
 
   if (bookIndex !== -1) {
-    const newTitle = prompt("Judul Baru : ", books[bookIndex].titleBook);
-    const newAuthor = prompt("Author Baru : ", books[bookIndex].authorBook);
-    const newYear = prompt("Tahun Baru : ", books[bookIndex].yearBookForm);
+    const newTitle = prompt("Judul Baru : ", books[bookIndex].title);
+    const newAuthor = prompt("Author Baru : ", books[bookIndex].author);
+    const newYear = prompt("Tahun Baru : ", books[bookIndex].year);
 
     if (newTitle && newAuthor && newYear) {
-      books[bookIndex].titleBook = newTitle;
-      books[bookIndex].authorBook = newAuthor;
-      books[bookIndex].yearBookForm = parseInt(newYear);
+      books[bookIndex].title = newTitle;
+      books[bookIndex].author = newAuthor;
+      books[bookIndex].year = parseInt(newYear);
 
       saveBooks(books);
       renderBooks();
